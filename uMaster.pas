@@ -11,7 +11,7 @@ uses
   FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client,
 
-  System.Threading, Vcl.Imaging.jpeg, Vcl.Imaging.pngimage;
+  System.Threading, ClassDonwload;
 
 type
   TfMaster = class(TForm)
@@ -26,6 +26,8 @@ type
     btnDisplayHistory: TBitBtn;
     pnlProgressBar: TPanel;
     ProgressBar: TProgressBar;
+    lblPercentage: TLabel;
+
     procedure FormCreate(Sender: TObject);
     procedure btnStartClick(Sender: TObject);
     procedure btnDisplayMessageClick(Sender: TObject);
@@ -33,6 +35,7 @@ type
     procedure btnDisplayHistoryClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure edtLinkChange(Sender: TObject);
+    procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
 
   private
     { Private declarations }
@@ -40,6 +43,7 @@ type
     procedure OnOffOptions;
   public
     { Public declarations }
+    Downloads : TDownloads;
   end;
 
 var
@@ -50,7 +54,7 @@ var
 
 implementation
 
-uses uDM;
+uses uDM, uFunctions, uHistory;
 
 {$R *.dfm}
 
@@ -63,6 +67,11 @@ begin
   bMessage := False;
 
   OnOffOptions;
+end;
+
+procedure TfMaster.FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if key = VK_ESCAPE then btnCloseClick(Sender);
 end;
 
 procedure TfMaster.btnStartClick(Sender: TObject);
@@ -87,8 +96,16 @@ begin
 end;
 
 procedure TfMaster.btnDisplayHistoryClick(Sender: TObject);
+var
+  frmHistory: TForm;
+
 begin
-  // 4
+  try
+    frmHistory := TfHistory.Create(nil);
+    frmHistory.ShowModal;
+  finally
+    FreeAndNil(frmHistory);
+  end;
 end;
 
 procedure TfMaster.btnCloseClick(Sender: TObject);
@@ -110,10 +127,11 @@ begin
   btnStart.Enabled          := bLinkInformation and (not bInProgress);
   btnDisplayMessage.Enabled := bInProgress;
   btnStop.Enabled           := bInProgress;
-  btnDisplayHistory.Enabled := not bInProgress;
+  //btnDisplayHistory.Enabled := not bInProgress;
 
-  pnlProgressBar.Visible    := bInProgress and bMessage;
+  lblPercentage.Visible     := bInProgress and bMessage;
+
+  pnlProgressBar.Visible    := bLinkInformation and bInProgress;
 end;
-
 
 end.
