@@ -2,9 +2,10 @@ object fMaster: TfMaster
   Left = 0
   Top = 0
   BorderIcons = []
+  BorderStyle = bsSingle
   Caption = 'Trace Downloads'
-  ClientHeight = 377
-  ClientWidth = 510
+  ClientHeight = 402
+  ClientWidth = 520
   Color = clCream
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -15,22 +16,21 @@ object fMaster: TfMaster
   OldCreateOrder = False
   Position = poScreenCenter
   OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
   object pnlMaster: TPanel
     Left = 0
     Top = 0
-    Width = 510
-    Height = 377
+    Width = 520
+    Height = 402
+    Margins.Bottom = 20
     Align = alClient
     TabOrder = 0
-    ExplicitLeft = 305
-    ExplicitWidth = 505
-    ExplicitHeight = 376
     object gbxLink: TGroupBox
       Left = 1
       Top = 1
-      Width = 508
+      Width = 518
       Height = 78
       Align = alTop
       Caption = ' [Link para dowload] '
@@ -48,7 +48,6 @@ object fMaster: TfMaster
       ParentDoubleBuffered = False
       ParentFont = False
       TabOrder = 0
-      ExplicitWidth = 503
       object edtLink: TEdit
         Left = 9
         Top = 32
@@ -67,8 +66,8 @@ object fMaster: TfMaster
     object gbxOptions: TGroupBox
       Left = 1
       Top = 79
-      Width = 508
-      Height = 250
+      Width = 518
+      Height = 275
       Margins.Bottom = 10
       Align = alClient
       Caption = ' [Op'#231#245'es] '
@@ -82,11 +81,25 @@ object fMaster: TfMaster
       ParentColor = False
       ParentFont = False
       TabOrder = 1
-      ExplicitHeight = 290
+      object lblPercentage: TLabel
+        Left = 9
+        Top = 254
+        Width = 70
+        Height = 13
+        Caption = '% download'
+        Color = clHighlight
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentColor = False
+        ParentFont = False
+      end
       object btnStart: TBitBtn
         Left = 2
         Top = 18
-        Width = 504
+        Width = 514
         Height = 46
         Cursor = crHandPoint
         Align = alTop
@@ -99,12 +112,11 @@ object fMaster: TfMaster
         ParentFont = False
         TabOrder = 0
         OnClick = btnStartClick
-        ExplicitWidth = 499
       end
       object btnDisplayMessage: TBitBtn
         Left = 2
         Top = 64
-        Width = 504
+        Width = 514
         Height = 46
         Cursor = crHandPoint
         Align = alTop
@@ -117,12 +129,11 @@ object fMaster: TfMaster
         ParentFont = False
         TabOrder = 1
         OnClick = btnDisplayMessageClick
-        ExplicitWidth = 499
       end
       object btnStop: TBitBtn
         Left = 2
         Top = 110
-        Width = 504
+        Width = 514
         Height = 46
         Cursor = crHandPoint
         Align = alTop
@@ -135,12 +146,11 @@ object fMaster: TfMaster
         ParentFont = False
         TabOrder = 2
         OnClick = btnStopClick
-        ExplicitWidth = 499
       end
       object btnClose: TBitBtn
         Left = 2
         Top = 202
-        Width = 504
+        Width = 514
         Height = 46
         Cursor = crHandPoint
         Align = alTop
@@ -153,12 +163,11 @@ object fMaster: TfMaster
         ParentFont = False
         TabOrder = 3
         OnClick = btnCloseClick
-        ExplicitWidth = 499
       end
       object btnDisplayHistory: TBitBtn
         Left = 2
         Top = 156
-        Width = 504
+        Width = 514
         Height = 46
         Cursor = crHandPoint
         Align = alTop
@@ -171,14 +180,13 @@ object fMaster: TfMaster
         ParentFont = False
         TabOrder = 4
         OnClick = btnDisplayHistoryClick
-        ExplicitWidth = 499
       end
     end
     object pnlProgressBar: TPanel
       AlignWithMargins = True
       Left = 4
-      Top = 332
-      Width = 502
+      Top = 357
+      Width = 512
       Height = 41
       Align = alBottom
       BevelOuter = bvNone
@@ -188,16 +196,13 @@ object fMaster: TfMaster
       ParentCtl3D = False
       ShowCaption = False
       TabOrder = 2
-      ExplicitTop = 331
-      ExplicitWidth = 497
       object ProgressBar: TProgressBar
         Left = 0
         Top = 0
-        Width = 502
+        Width = 512
         Height = 41
         Align = alClient
         TabOrder = 0
-        ExplicitWidth = 145
       end
     end
   end

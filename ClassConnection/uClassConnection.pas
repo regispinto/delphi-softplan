@@ -86,8 +86,6 @@ begin
   FConnection.Params.Add('DriverID='+ DriverID);
   FConnection.Params.Add('Database='+ FDatabase);
 
-  //--FDatabase := loadIni('BANCO', 'Database', 'db_dados');
-
   case AnsiIndexStr(UpperCase(DriverID), ['SQLITE', 'MYSQL', 'FB']) of
     0: begin
         FConnection.Params.Add('OpenMode='+'ReadWrite');
@@ -218,8 +216,3 @@ begin
 end;
 
 end.
-
-//Function FireBirdStarted: Boolean;
-//Begin
-//Result := ( FindWindow( ´FB_Guard´, Nil ) <> 0 ) ;
-//End;
