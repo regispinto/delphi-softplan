@@ -11,7 +11,8 @@ uses
   FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client,
 
-  System.Threading, ClassDonwload;
+  System.Threading, ClassDonwload, IdAntiFreezeBase, IdAntiFreeze,
+  IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient, IdHTTP;
 
 type
   TfMaster = class(TForm)
@@ -27,6 +28,8 @@ type
     pnlProgressBar: TPanel;
     ProgressBar: TProgressBar;
     lblPercentage: TLabel;
+    IdHTTP: TIdHTTP;
+    IdAntiFreeze: TIdAntiFreeze;
 
     procedure FormCreate(Sender: TObject);
     procedure btnStartClick(Sender: TObject);
@@ -76,6 +79,8 @@ end;
 
 procedure TfMaster.btnStartClick(Sender: TObject);
 begin
+  // TIdAntiFreeze: esse componente impede o congelamento da aplicação,enquanto aguardamos o fi nal do download.
+
   bInProgress := True;
 
   OnOffOptions;
@@ -90,7 +95,9 @@ end;
 
 procedure TfMaster.btnStopClick(Sender: TObject);
 begin
-    bInProgress := False;
+  bInProgress := False;
+
+  IdHTTP.Disconnect;
 
   OnOffOptions;
 end;
@@ -110,7 +117,17 @@ end;
 
 procedure TfMaster.btnCloseClick(Sender: TObject);
 begin
-  Application.Terminate;
+  if bInProgress then
+    begin
+      If MessageDlg('Existe um download em andamento, deseja interrompe-lo',
+        mtConfirmation,[mbYes, mbNo], 0) = mrYes then
+        begin
+          IdHTTP.Disconnect;
+          Application.Terminate;
+        end;
+    end
+  else
+   Application.Terminate;
 end;
 
 procedure TfMaster.edtLinkChange(Sender: TObject);
