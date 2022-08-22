@@ -62,7 +62,7 @@ begin
       QryDownloads.ExecSQL;
 
       Result := True;
-    Except
+    except
       on e: Exception do begin
         Erro := E.Message;
         Result := False;
