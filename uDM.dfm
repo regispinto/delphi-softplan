@@ -6,11 +6,7 @@ object DM: TDM
   Width = 402
   object FDConnection: TFDConnection
     Params.Strings = (
-      
-        'Database=C:\Users\Familia\Documents\workspace\delphi-softplan\Wi' +
-        'n32\Debug\Database\logs.db'
       'DriverID=SQLite')
-    Connected = True
     LoginPrompt = False
     Left = 72
     Top = 64
