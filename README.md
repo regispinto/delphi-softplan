@@ -8,7 +8,7 @@ Repósitório criado para teste técnico da Softplan
 * Layout do formulário principal da aplicação:
 
 ![image](https://user-images.githubusercontent.com/5474103/185820794-f5463fdf-cf93-4bfa-a826-48a39142c306.png)
-
+  
 * [Iniciar Download] - Fica habilitado somente após a url para download ser informada.
 * [Exibir mensagem] - Também fica habilitado também durante o download do arquivo. Esse botão tem o efeito de mostrar a mensagem e, opcionalmente, de esconde-la novamente.
 * [Parar download]  - Habilitado durante o download do arquivo
